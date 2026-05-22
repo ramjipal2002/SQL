@@ -1,6 +1,6 @@
-/* Write your T-SQL query statement below */
-SELECT r.contest_id,
- ROUND((100.00*COUNT(DISTINCT(r.user_id))/(SELECT COUNT(user_id) FROM Users)), 2) AS percentage
-FROM Register r
-GROUP BY r.contest_id
-ORDER BY percentage DESC, r.contest_id ASC
+# Write your MySQL query statement below
+select contest_id , 
+round((count(user_id)/(select count(*) from Users))*100,2) as percentage
+from Register 
+group by contest_id 
+order by percentage desc , contest_id asc
