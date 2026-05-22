@@ -1,6 +1,7 @@
 /* Write your T-SQL query statement below */
-select  s.user_id,
-round (sum(Case when c.action = 'confirmed' then 1 else 0 end )*1.0 /count(1),2) as confirmation_rate
-from signups as s 
-left join confirmations as c on s.user_Id = c.user_Id
-group by s.user_ID
+SELECT s.user_id, 
+       ROUND(SUM(CASE WHEN c.action = 'confirmed' THEN 1 ELSE 0 END) * 1.0 / COUNT(1), 2) AS confirmation_rate
+FROM signups s
+LEFT JOIN confirmations c
+ON s.user_id = c.user_id
+GROUP BY s.user_id;
