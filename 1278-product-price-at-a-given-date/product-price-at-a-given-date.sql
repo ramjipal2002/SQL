@@ -1,0 +1,16 @@
+/* Write your T-SQL query statement below */
+SELECT p.product_id,
+       ISNULL(x.new_price, 10) AS price
+FROM
+(
+    SELECT DISTINCT product_id
+    FROM Products
+) p
+OUTER APPLY
+(
+    SELECT TOP 1 new_price
+    FROM Products pr
+    WHERE pr.product_id = p.product_id
+      AND pr.change_date <= '2019-08-16'
+    ORDER BY change_date DESC
+) x;
